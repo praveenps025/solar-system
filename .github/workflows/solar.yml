@@ -20,23 +20,23 @@ env:
 jobs:
     unit-testing:
         name: Unit testing
-        strategy:
-            matrix:
-                nodejs_version: [18, 19, 20]
-                operating_system: [ubuntu-latest, macos-latest]
-                exclude:
-                    - operating_system: macos-latest
+        # strategy:
+        #     matrix:
+        #         nodejs_version: [18, 19, 20]
+        #         operating_system: [ubuntu-latest, macos-latest]
+        #         exclude:
+        #             - operating_system: macos-latest
 
-        runs-on: ${{ matrix.operating_system }}
+        runs-on: ubuntu-latest
 
         steps:
         - name: Checkout repo
           uses: actions/checkout@v4
         
-        - name: Setup NodeJS V ${{ matrix.nodejs_version }}
+        - name: Setup NodeJS V - 18
           uses: actions/setup-node@v3
           with:
-            node-version: ${{ matrix.nodejs_version }}
+            node-version: 18
         
         - name: Install Dependencies
           run: npm install
@@ -44,11 +44,36 @@ jobs:
         - name: Unit testing
           run: npm test
 
-        # - name: Archive Test Result
-        #   uses: actions/upload-artifact@v4
-        #   with:
-        #     name: Mocha-Test-Result
-        #     path: test-results.xml
+        - name: Archive Test Result
+          uses: actions/upload-artifact@v4
+          with:
+            name: Mocha-Test-Result
+            path: test-results.xml
 
+    code-coverage:
+        name: Code Coverage
+        runs-on: ubuntu-latest
+
+        steps:
+        - name: Checkout repo
+          uses: actions/checkout@v4
         
+        - name: Setup NodeJS V - 18
+          uses: actions/setup-node@v3
+          with:
+            node-version: 18
+        
+        - name: Install Dependencies
+          run: npm install
+
+        - name: Check Code Coverage
+          run: npm run coverage
+
+        - name: Archive Test Result
+          uses: actions/upload-artifact@v4
+          with:
+            name: Code-Coverage-Result
+            path: coverage
+            retention-days: 5
+
 
