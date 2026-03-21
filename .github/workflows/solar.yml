@@ -53,7 +53,6 @@ jobs:
     code-coverage:
         name: Code Coverage
         runs-on: ubuntu-latest
-        continue-on-error: true
 
         steps:
         - name: Checkout repo
@@ -68,6 +67,7 @@ jobs:
           run: npm install
 
         - name: Check Code Coverage
+          continue-on-error: true
           run: npm run coverage
 
         - name: Archive Test Result
