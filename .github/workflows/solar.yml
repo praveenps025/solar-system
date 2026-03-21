@@ -7,10 +7,15 @@ on:
             - main
             - 'feature/*'
 
+# env:
+#     MONGO_URL: 'mongodb+srv://supercluster.d83jj.mongodb.net/superData'
+#     MONGO_USERNAME: ${{ vars.MONGO_USERNAME }}
+#     MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+
 env:
-    MONGO_URL: 'mongodb+srv://supercluster.d83jj.mongodb.net/superData'
-    MONGO_USERNAME: ${{ vars.MONGO_USERNAME }}
-    MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+  MONGO_URI: 'mongodb+srv://supercluster.d83jj.mongodb.net/superData'
+  MONGO_USERNAME: ${{ vars.MONGO_USERNAME }}
+  MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
 
 jobs:
     unit-testing:
