@@ -95,6 +95,8 @@ jobs:
     docker-setup:
       name: Continerization
       needs: [unit-testing, code-coverage]              # Only runs if the mentioned blocks are success
+      permissions:
+          packages: write
       runs-on: ubuntu-latest
       steps:
         - name: Checkout Repo
