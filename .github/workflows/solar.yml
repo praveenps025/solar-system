@@ -130,7 +130,7 @@ jobs:
                 -e MONGO_URI=$MONGO_URI \                 
                 -e MONGO_USERNAME=$MONGO_USERNAME \
                 -e MONGO_PASSWORD=$MONGO_PASSWORD \
-                ${{ vars.DOCKERHUB_USERNAME }}/solar-system:$${{ github.sha }}
+                ${{ vars.DOCKERHUB_USERNAME }}/solar-system:${{ github.sha }}
             
             # Step 3: Fetch the container's internal IP address (useful for debugging)
             
