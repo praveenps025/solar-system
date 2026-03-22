@@ -111,7 +111,7 @@ jobs:
           with:
             context: .                                  # it will search for dockerfile in root directory
             push: false                                 # if its not set to false this block will build and push the image
-            tags: ${{ vars.DOCKERHUB_USERNAME }}/solar-system:$${{ github.sha }}      # github.sha uses commit ID
+            tags: ${{ vars.DOCKERHUB_USERNAME }}/solar-system:${{ github.sha }}      # github.sha uses commit ID
 
         - name: Docker Image testing
           run: |
