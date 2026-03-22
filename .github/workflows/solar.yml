@@ -44,7 +44,7 @@ jobs:
             path: node_modules                                                            # path where dependencies are installed
             key: ${{ runner.os }}-node-modules-${{ hashfiles('package-lock.json') }}      # this validates package-lock.json if there is any change in that file it will clear the cache
         
-            
+
         - name: Install Dependencies
           run: npm install
 
@@ -91,5 +91,19 @@ jobs:
             name: Code-Coverage-Result
             path: coverage
             retention-days: 5
+
+    docker-setup:
+      name: Continerization
+      needs: [unit-testing, code-coverage]              # Only runs if the mentioned blocks are success
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout Repo
+          uses: actions/checkout@v4
+
+        - name: Dockerhub Login
+          uses: docker/login-action@v4
+          with:
+            username: ${{ vars.DOCKERHUB_USERNAME }}
+            password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
 
