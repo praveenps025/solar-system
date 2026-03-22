@@ -145,4 +145,10 @@ jobs:
             echo Testing Image URL using wget
             wget -q -O - http://127.0.0.1:3000/live | grep live
             
+        - name: Docker Push
+          uses: docker/build-push-action@v4
+          with:
+            context: .                                  # it will search for dockerfile in root directory
+            push: true                                  # if its not set to false this block will build and push the image
+            tags: ${{ vars.DOCKERHUB_USERNAME }}/solar-system:${{ github.sha }}      # github.sha uses commit ID
 
