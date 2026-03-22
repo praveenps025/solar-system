@@ -143,5 +143,6 @@ jobs:
             # - grep ensures the response contains "live"
             
             echo Testing Image URL using wget
-            wget -q -o - 127.0.0.1:3000/live | grep live
+            wget -q -O - http://127.0.0.1:3000/live | grep live
+            
 
